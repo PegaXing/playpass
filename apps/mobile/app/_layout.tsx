@@ -1,1 +1,31 @@
-import{useEffect}from'react';import{Stack}from'expo-router';import{StatusBar}from'expo-status-bar';import{useFonts,Nunito_400Regular,Nunito_500Medium,Nunito_600SemiBold,Nunito_700Bold,Nunito_800ExtraBold}from'@expo-google-fonts/nunito';import*as SplashScreen from'expo-splash-screen';import*as Notifications from'expo-notifications';import{GestureHandlerRootView}from'react-native-gesture-handler';import{AuthProvider,useAuth}from'../lib/auth-context';import{handleNotificationTap}from'../lib/notifications';SplashScreen.preventAutoHideAsync();function RootNav(){const{user}=useAuth();useEffect(()=>{const sub=Notifications.addNotificationResponseReceivedListener(r=>{if(user?.role)handleNotificationTap(r.notification,user.role)});return()=>sub.remove()},[user]);return<Stack screenOptions={{headerShown:false,contentStyle:{backgroundColor:'#0D0F1E'}}}><Stack.Screen name="(auth)"/><Stack.Screen name="(parent)"/><Stack.Screen name="(child)"/></Stack>}export default function RootLayout(){const[fontsLoaded,fontError]=useFonts({Nunito_400Regular,Nunito_500Medium,Nunito_600SemiBold,Nunito_700Bold,Nunito_800ExtraBold});useEffect(()=>{if(fontsLoaded||fontError)SplashScreen.hideAsync()},[fontsLoaded,fontError]);if(!fontsLoaded&&!fontError)return null;return<GestureHandlerRootView style={{flex:1}}><AuthProvider><RootNav/><StatusBar style="light"/></AuthProvider></GestureHandlerRootView>}
+import { useEffect } from 'react'
+import { Stack } from 'expo-router'
+import { useFonts, Nunito_400Regular, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold, Nunito_900Black } from '@expo-google-fonts/nunito'
+import * as SplashScreen from 'expo-splash-screen'
+import { AuthProvider } from '../lib/auth-context'
+import { StatusBar } from 'expo-status-bar'
+
+SplashScreen.preventAutoHideAsync()
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    Nunito_400Regular, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold, Nunito_900Black,
+  })
+
+  useEffect(() => {
+    if (fontsLoaded) SplashScreen.hideAsync()
+  }, [fontsLoaded])
+
+  if (!fontsLoaded) return null
+
+  return (
+    <AuthProvider>
+      <StatusBar style="light" />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#0D0F1E' } }}>
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(parent)" />
+        <Stack.Screen name="(child)" />
+      </Stack>
+    </AuthProvider>
+  )
+}
