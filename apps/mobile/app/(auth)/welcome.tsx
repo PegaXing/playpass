@@ -1,11 +1,50 @@
-import{View,Text,TouchableOpacity}from'react-native';import{router}from'expo-router';import{SafeAreaView}from'react-native-safe-area-context';import{LinearGradient}from'expo-linear-gradient';import{Colors,Typography,Radius}from'../../constants/design';
-export default function Welcome(){return(<View style={{flex:1,backgroundColor:Colors.bg}}><View style={{position:'absolute',width:300,height:300,borderRadius:150,backgroundColor:'rgba(91,103,248,0.18)',top:-80,right:-80}}/><View style={{position:'absolute',width:250,height:250,borderRadius:125,backgroundColor:'rgba(155,93,229,0.15)',bottom:150,left:-60}}/>
-<SafeAreaView style={{flex:1,paddingHorizontal:24,paddingBottom:24,justifyContent:'space-between'}}>
-<View style={{flexDirection:'row',alignItems:'center',gap:10,paddingTop:16}}><LinearGradient colors={['#00D4FF','#5B67F8','#9B5DE5']} style={{width:48,height:48,borderRadius:14,alignItems:'center',justifyContent:'center'}} start={{x:0,y:0}} end={{x:1,y:1}}><View style={{width:0,height:0,borderTopWidth:8,borderBottomWidth:8,borderLeftWidth:13,borderTopColor:'transparent',borderBottomColor:'transparent',borderLeftColor:'rgba(255,255,255,0.95)',marginLeft:2}}/></LinearGradient><Text style={{fontFamily:Typography.family.extraBold,fontSize:22,color:Colors.text}}>PlayPass</Text></View>
-<View style={{gap:16}}><Text style={{fontFamily:Typography.family.extraBold,fontSize:36,color:Colors.text,lineHeight:42}}>Less arguing.{'
-'}<Text style={{color:Colors.cyan}}>More earning.</Text></Text><Text style={{fontFamily:Typography.family.medium,fontSize:15,color:Colors.text2,lineHeight:24}}>Reward responsibility. Unlock play. The smarter way to manage screen time for the whole family.</Text></View>
-<View style={{gap:12}}>{[{icon:'🎮',title:'Earn Pass Time',sub:'Complete missions to unlock gaming time'},{icon:'🎯',title:'Xbox tracking',sub:'Gaming time auto-deducted every 15 minutes'},{icon:'🏆',title:'Streaks & Unlocks',sub:'Milestones, badges and bonus Pass Time'}].map(f=>(<View key={f.title} style={{flexDirection:'row',alignItems:'center',gap:14,backgroundColor:Colors.card,borderRadius:Radius.lg,padding:14,borderWidth:1,borderColor:Colors.border}}><View style={{width:40,height:40,borderRadius:10,backgroundColor:Colors.card2,alignItems:'center',justifyContent:'center'}}><Text style={{fontSize:20}}>{f.icon}</Text></View><View style={{flex:1}}><Text style={{fontFamily:Typography.family.bold,fontSize:14,color:Colors.text,marginBottom:2}}>{f.title}</Text><Text style={{fontFamily:Typography.family.regular,fontSize:12,color:Colors.text2}}>{f.sub}</Text></View></View>))}</View>
-<View style={{gap:12}}><TouchableOpacity onPress={()=>router.push('/(auth)/signup')} activeOpacity={0.88}><LinearGradient colors={['#5B67F8','#9B5DE5']} style={{height:54,borderRadius:Radius.lg,alignItems:'center',justifyContent:'center'}} start={{x:0,y:0}} end={{x:1,y:0}}><Text style={{fontFamily:Typography.family.extraBold,fontSize:17,color:'#fff'}}>Get started — I'm a parent</Text></LinearGradient></TouchableOpacity>
-<TouchableOpacity style={{height:52,borderRadius:Radius.lg,alignItems:'center',justifyContent:'center',backgroundColor:Colors.card,borderWidth:1,borderColor:Colors.border2}} onPress={()=>router.push('/(auth)/join')} activeOpacity={0.85}><Text style={{fontFamily:Typography.family.bold,fontSize:15,color:Colors.text}}>I'm a player — I have an invite code 🎮</Text></TouchableOpacity>
-<TouchableOpacity onPress={()=>router.push('/(auth)/login')} activeOpacity={0.75}><Text style={{fontFamily:Typography.family.medium,fontSize:13,color:Colors.text3,textAlign:'center',padding:8}}>Already have an account? Sign in</Text></TouchableOpacity></View>
-</SafeAreaView></View>)}
+import { View, Text, TouchableOpacity } from 'react-native'
+import { router } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Colors, Typography, Radius } from '../../constants/design'
+
+export default function Welcome() {
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.bg, paddingHorizontal: 24, paddingBottom: 32 }}>
+      <View style={{ flex: 1, justifyContent: 'space-between', paddingTop: 48 }}>
+        <View style={{ alignItems: 'center', gap: 8 }}>
+          <Text style={{ fontSize: 48 }}>🎮</Text>
+          <Text style={{ fontFamily: Typography.family.extraBold, fontSize: 36, color: Colors.text, textAlign: 'center' }}>PlayPass</Text>
+          <Text style={{ fontFamily: Typography.family.medium, fontSize: 16, color: Colors.text2, textAlign: 'center', lineHeight: 24 }}>
+            Less arguing. More earning.
+          </Text>
+        </View>
+        <View style={{ gap: 16 }}>
+          {[
+            { icon: '🎯', title: 'Earn Pass Time', sub: 'Complete missions to unlock gaming' },
+            { icon: '🎮', title: 'Xbox tracking', sub: 'Gaming time auto-deducted every 15 mins' },
+            { icon: '🏆', title: 'Streaks and Unlocks', sub: 'Milestones, badges and bonus Pass Time' },
+          ].map(f => (
+            <View key={f.title} style={{ flexDirection: 'row', alignItems: 'center', gap: 14, backgroundColor: Colors.card, borderRadius: Radius.lg, padding: 14, borderWidth: 1, borderColor: Colors.border }}>
+              <Text style={{ fontSize: 24 }}>{f.icon}</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontFamily: Typography.family.bold, fontSize: 14, color: Colors.text, marginBottom: 2 }}>{f.title}</Text>
+                <Text style={{ fontFamily: Typography.family.regular, fontSize: 12, color: Colors.text2 }}>{f.sub}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+        <View style={{ gap: 12 }}>
+          <TouchableOpacity
+            onPress={() => router.push('/(auth)/signup')}
+            style={{ height: 54, borderRadius: Radius.lg, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.indigo }}>
+            <Text style={{ fontFamily: Typography.family.extraBold, fontSize: 17, color: '#fff' }}>Get started as a parent</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ height: 52, borderRadius: Radius.lg, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.card, borderWidth: 1, borderColor: Colors.border2 }}
+            onPress={() => router.push('/(auth)/join')}>
+            <Text style={{ fontFamily: Typography.family.bold, fontSize: 15, color: Colors.text }}>I have an invite code</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
+            <Text style={{ fontFamily: Typography.family.medium, fontSize: 13, color: Colors.text3, textAlign: 'center', padding: 8 }}>Already have an account? Sign in</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  )
+}
