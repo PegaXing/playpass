@@ -1,0 +1,13 @@
+import{useState}from'react';import{Text,TextInput,TouchableOpacity,KeyboardAvoidingView,Platform,ScrollView,ActivityIndicator,Alert}from'react-native';import{router}from'expo-router';import{SafeAreaView}from'react-native-safe-area-context';import{useAuth}from'../../lib/auth-context';import{Colors,Typography,Radius}from'../../constants/design';
+export default function Login(){const{signIn}=useAuth();const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[loading,setLoading]=useState(false);
+const inp={backgroundColor:Colors.card2,borderRadius:Radius.md,borderWidth:1.5,borderColor:Colors.border2,paddingHorizontal:16,height:52,fontFamily:Typography.family.regular,fontSize:15,color:Colors.text};
+const submit=async()=>{if(!email||!password)return;setLoading(true);const{error}=await signIn({email,password});setLoading(false);if(error)Alert.alert('Sign in failed',error.includes('Invalid')?'Incorrect email or password.':error)};
+return(<SafeAreaView style={{flex:1,backgroundColor:Colors.bg}}><KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{flex:1}}><ScrollView contentContainerStyle={{flexGrow:1,padding:24,gap:16}} keyboardShouldPersistTaps="handled">
+<TouchableOpacity onPress={()=>router.back()}><Text style={{fontFamily:Typography.family.medium,fontSize:15,color:Colors.indigoLight,marginBottom:16}}>← Back</Text></TouchableOpacity>
+<Text style={{fontFamily:Typography.family.extraBold,fontSize:28,color:Colors.text,marginBottom:4}}>Welcome back</Text>
+<Text style={{fontFamily:Typography.family.regular,fontSize:15,color:Colors.text2,marginBottom:8}}>Sign in to your parent account.</Text>
+<TextInput style={inp} placeholder="Email address" placeholderTextColor={Colors.text3} value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address"/>
+<TextInput style={inp} placeholder="Password" placeholderTextColor={Colors.text3} value={password} onChangeText={setPassword} secureTextEntry returnKeyType="done" onSubmitEditing={submit}/>
+<TouchableOpacity style={{height:52,backgroundColor:Colors.indigo,borderRadius:Radius.lg,alignItems:'center',justifyContent:'center',opacity:loading?0.6:1}} onPress={submit} disabled={loading}>{loading?<ActivityIndicator color="#fff"/>:<Text style={{fontFamily:Typography.family.extraBold,fontSize:17,color:'#fff'}}>Sign in</Text>}</TouchableOpacity>
+<TouchableOpacity onPress={()=>router.replace('/(auth)/signup')} style={{alignItems:'center',marginTop:8}}><Text style={{color:Colors.text2,fontFamily:Typography.family.regular,fontSize:13}}>No account? <Text style={{color:Colors.indigoLight,fontFamily:Typography.family.bold}}>Create one free</Text></Text></TouchableOpacity>
+</ScrollView></KeyboardAvoidingView></SafeAreaView>)}
