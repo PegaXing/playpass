@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "PlayPass","slug": "playpass","version": "1.0.0","orientation": "portrait","userInterfaceStyle": "dark",
+    "splash": {"backgroundColor": "#0D0F1E"},"assetBundlePatterns": ["**/*"],
+    "ios": {"supportsTablet": false,"bundleIdentifier": "com.playpass.app","buildNumber": "1",
+      "infoPlist": {"NSCameraUsageDescription": "PlayPass uses your camera for mission proof photos.","NSPhotoLibraryUsageDescription": "PlayPass accesses photos for mission proof."}
+    },
+    "plugins": [["expo-router",{"origin":"https://playpass.app"}],["expo-notifications",{"color":"#5B67F8"}],"expo-secure-store",["expo-image-picker",{"photosPermission":"PlayPass accesses your photos for mission proof."}]],
+    "experiments": {"typedRoutes": true},
+    "extra": {"eas": {"projectId": "YOUR_EAS_PROJECT_ID"}}
+  }
+}
