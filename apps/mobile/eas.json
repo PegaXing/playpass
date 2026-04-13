@@ -1,0 +1,9 @@
+{
+  "cli": {"version": ">= 5.9.0"},
+  "build": {
+    "development": {"developmentClient": true,"distribution": "internal","ios": {"simulator": true}},
+    "preview": {"distribution": "internal","ios": {"simulator": false}},
+    "production": {"ios": {"autoIncrement": true}}
+  },
+  "submit": {"production": {"ios": {"appleId": "jonathanshihor@gmail.com","ascAppId": "6762045857","appleTeamId": "6dd92d8a-2153-4616-b32c-42abd02a135a"}}}
+}
